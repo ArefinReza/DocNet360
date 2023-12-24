@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+</head>
+<body class="bg-gray-100 p-4">
+
+    <div class="max-w-lg mx-auto bg-white p-8 rounded shadow-md">
+        <!-- logo  -->
+        <div class="flex justify-between">
+            <!-- Text Content -->
+            <div class="w-1/2">
+                <h1 class="text-3xl font-bold">DocNet360</h1>
+                <h2 class="text-sm">Your Helth, Your Time, Your Way</h2>
+            </div>
+            <!-- Image Content -->
+            <div class="w-1/4">
+              <img class="w-full h-auto" src="./docnet360-high-resolution-logo-color-on-transparent-background.png" alt="Responsive Image">
+            </div>
+        </div>
+          
+        <h1 class="text-2xl font-bold mb-6">Prescription Form</h1>
+
+        <form id="prescriptionForm" class="space-y-4">
+            <div>
+                <label for="patientName" class="block text-sm font-medium text-gray-600">Patient Name:</label>
+                <input type="text" id="patientName" name="patientName" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div>
+                <label for="medication" class="block text-sm font-medium text-gray-600">Medication:</label>
+                <textarea id="medication" name="medication" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
+            </div>
+
+            <div>
+                <label for="instructions" class="block text-sm font-medium text-gray-600">Instructions:</label>
+                <textarea id="instructions" name="instructions" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
+            </div>
+
+            <div class="space-x-2">
+                <button type="button" onclick="generatePDF()" class="bg-blue-500 text-white px-4 py-2 rounded-md">Generate PDF</button>
+                <button type="button" onclick="printPDF()" class="bg-green-500 text-white px-4 py-2 rounded-md">Print PDF</button>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        function generatePDF() {
+            var patientName = document.getElementById('patientName').value;
+            var medication = document.getElementById('medication').value;
+            var instructions = document.getElementById('instructions').value;
+
+            var uniqueId = Date.now(); // Generate a unique ID using timestamp
+
+            var content = `
+            <div class="flex justify-between">
+            <!-- Text Content -->
+            <div class="w-1/2">
+                <h1 class="text-3xl font-bold">DocNet360</h1>
+                <h2 class="text-sm">Your Helth, Your Time, Your Way</h2>
+            </div>
+            <!-- Image Content -->
+            <div class="w-1/4">
+              <img class="w-full h-auto" src="./docnet360-high-resolution-logo-color-on-transparent-background.png" alt="Responsive Image">
+            </div>
+        </div>
+                <div class="bg-blue-500 text-white px-4 py-2 rounded-md">Patient Name: ${patientName}</div>
+                <div class="text-green-600">Medication: ${medication}</div>
+                <div class="text-orange-600">Instructions: ${instructions}</div>
+            `;
+
+            var element = document.createElement('div');
+            element.innerHTML = content;
+
+            var filename = `${patientName}_Prescription_${uniqueId}.pdf`;
+
+            html2pdf(element, {
+                margin: 10,
+                filename: filename,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            });
+        }
+
+        function printPDF() {
+            generatePDF(); // Generating PDF before printing
+            window.print();
+        }
+    </script>
+
+</body>
+</html>
