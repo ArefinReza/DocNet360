@@ -9,9 +9,12 @@
 </head>
 <body class="bg-gray-100 p-4">
 
-    <div class="max-w-7xl mx-auto bg-white p-8 rounded shadow-md">
+    <div class="max-w-5xl mx-auto bg-white p-8 rounded shadow-md">
         <!-- logo  -->
-        <div class="flex justify-between">
+        <div class="w-1/4 object-top">
+            <img class="w-full h-auto" src="./logo-no-background.png" alt="Responsive Image">
+          </div>
+        <div class="justify-between">
             <!-- Text Content -->
             <div class="w-1/2">
 
@@ -22,9 +25,7 @@
                     National Institute of Cardiovascular Diseases & Hospital</p>
             </div>
             <!-- Image Content -->
-            <div class="w-1/6 ml-6">
-              <img class="w-full h-auto" src="./docnet360-high-resolution-logo-color-on-transparent-background.png" alt="Responsive Image">
-            </div>
+            
         </div>
           
         <h1 class="text-2xl font-bold mb-6">Prescription Form</h1>
@@ -72,7 +73,7 @@
             <div class="w-1/4">
               <img class="w-full h-auto" src="./docnet360-high-resolution-logo-color-on-transparent-background.png" alt="Responsive Image">
             </div>
-        </div>
+            </div>
                 <div class="bg-blue-500 text-white px-4 py-2 rounded-md">Patient Name: ${patientName}</div>
                 <div class="text-green-600">Medication: ${medication}</div>
                 <div class="text-orange-600">Instructions: ${instructions}</div>
@@ -86,7 +87,7 @@
             html2pdf(element, {
                 margin: 10,
                 filename: filename,
-                image: { type: 'jpeg', quality: 0.98 },
+                image: { type: 'jpeg', quality: 100 },
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             });
