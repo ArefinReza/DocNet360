@@ -30,6 +30,10 @@
                 <label for="patientName" class="block text-sm font-medium text-gray-600">Patient Name:</label>
                 <input type="text" id="patientName" name="patientName" class="mt-1 p-2 w-full border rounded-md">
             </div>
+            <div>
+                <label for="patientAge" class="block text-sm font-medium text-gray-600">Patient Age:</label>
+                <input type="number" id="patientAge" name="patientAge" class="mt-1 p-2 w-full border rounded-md">
+            </div>
 
             <div>
                 <label for="medication" class="block text-sm font-medium text-gray-600">Medication:</label>
@@ -52,6 +56,8 @@
     <script>
         function generatePDF() {
             var patientName = document.getElementById('patientName').value;
+            var patientAge = document.getElementById('patientAge').value;
+
             var medication = document.getElementById('medication').value;
             var instructions = document.getElementById('instructions').value;
 
@@ -75,6 +81,8 @@
             </div>
         </div>
                 <div class="bg-blue-500 text-white px-4 py-2 rounded-md">Patient Name: ${patientName}</div>
+                <div class="bg-blue-500 text-white px-4 py-2 rounded-md">Patient Name: ${patientAge}</div>
+
                 <div class="text-green-600">Medication: ${medication}</div>
                 <div class="text-orange-600">Instructions: ${instructions}</div>
             `;
