@@ -9,55 +9,81 @@
 </head>
 <body class="bg-gray-100 p-4">
 
-    <div class="max-w-5xl mx-auto bg-white p-8 rounded shadow-md">
+    <div class="max-w-5xl mx-auto bg-emerald-300 p-8 rounded shadow-md">
         <!-- logo  -->
-        <div class="flex justify-between">
+        <div class="w-1/2 justify-center mx-auto mb-9">
+            <img class="w-full h-auto" src="./logo-no-background.png" alt="Responsive Image">
+        </div>
+
+        <div class="justify-between">
             <!-- Text Content -->
-            <div class="w-1/2">
-                <h1 class="text-3xl font-bold">DocNet360</h1>
-                <h2 class="text-sm">Your Helth, Your Time, Your Way</h2>
+            <div class="w-1/2 ">
+
+                <h3 class="text-2xl font-bold text-purple-700">Dr. Muhammad Mustafizur Rahman</h3>
+                <p class="text-purple-600">MBBS, MCPS (Medicine), MD (Cardiology)
+                    Clinical & Interventional Cardiologist and Cardiac Electrophysiologist
+                    Assistant Professor, Cardiology
+                    National Institute of Cardiovascular Diseases & Hospital</p>
             </div>
             <!-- Image Content -->
-            <div class="w-1/4">
-              <img class="w-full h-auto" src="./docnet360-high-resolution-logo-color-on-transparent-background.png" alt="Responsive Image">
-            </div>
+            
         </div>
           
         <h1 class="text-2xl font-bold mb-6">Prescription Form</h1>
 
-        <form id="prescriptionForm" class="space-y-4">
-            <div class="grid grid-cols-3 gap-4">
+        <form id="prescriptionForm" class="space-y-4 ">
+            <div class="grid grid-cols-4 gap-4">
                 <div>
                     <div>
-                        <label for="patientName" class="block text-sm font-medium text-gray-600">Patient Name:</label>
-                        <input type="text" id="patientName" name="patientName" class="mt-1 p-2 w-full border rounded-md">
+                        <label for="patientName" class="block text-sm font-medium text-purple-500 ">Patient Name:</label>
+                        <input type="text" id="patientName" name="patientName" class="mt-1 p-2 w-full border rounded-md text-violet-700	">
                     </div>
                 </div>
                 
                 <div>
                     <div>
-                        <label for="patientAge" class="block text-sm font-medium text-gray-600">Patient Age:</label>
-                        <input type="number" id="patientAge" name="patientAge" class="mt-1 p-2 w-full border rounded-md">
+                        <label for="patientAge" class="block text-sm font-medium text-purple-500">Patient Age:</label>
+                        <input type="text" id="patientAge" name="patientAge" class="mt-1 p-2 w-full border rounded-md">
                     </div>
         
                 </div>
                 <div>
-                    <div>
-                        <label for="gender" class="block text-sm font-medium text-gray-600">Gender:</label>
-                        <input type="text" id="gender" name="gender" class="mt-1 p-2 w-full border rounded-md">
-                    </div>
-        
+                    <select id="gender" name="gender" class="mt-6 p-2 w-full border rounded-md text-purple-500">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-purple-500">Email:</label>
+                    <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
                 </div>
               </div>
             <div>
-
-            <div>
-                <label for="medication" class="block text-sm font-medium text-gray-600">Medication:</label>
-                <textarea id="medication" name="medication" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
+                <label for="history" class="block text-sm font-medium text-purple-500">History:</label>
+                <textarea id="history" name="history" rows="1" class="mt-1 p-2 w-full border rounded-md"></textarea>
             </div>
 
+            <div class="grid grid-cols-3 gap-4">
+                <!-- First item, takes up one-third of the width -->
+                <div class="col-span-1 p-4 rounded">
+                    <div>
+                        <label for="diagnosis" class="block text-sm font-medium text-purple-500">Diagnosis:</label>
+                        <textarea id="diagnosis" name="diagnosis" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
+                    </div>
+                 
+                </div>
+    
+                <!-- Second item, takes up two-thirds of the width -->
+                <div class="col-span-2 p-4 rounded">
+                    <div>
+                        <label for="medication" class="block text-sm font-medium text-purple-500">Medication:</label>
+                        <textarea id="medication" name="medication" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
+                    </div>
+                </div>
+            </div>
             <div>
-                <label for="instructions" class="block text-sm font-medium text-gray-600">Instructions:</label>
+                <label for="instructions" class="block text-sm font-medium text-purple-500">Instructions:</label>
                 <textarea id="instructions" name="instructions" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
             </div>
 
@@ -71,42 +97,95 @@
 
     <script>
         function generatePDF() {
-            var patientName = document.getElementById('patientName').value;
-            var patientAge = document.getElementById('patientAge').value;
+            let patientName = document.getElementById('patientName').value;
+            let patientAge = document.getElementById('patientAge').value;
+            let gender = document.getElementById('gender').value;
+            let email = document.getElementById('email').value;
+            let medication = document.getElementById('medication').value;
+            let history = document.getElementById('history').value;
+            let diagnosis = document.getElementById('diagnosis').value;
+            let instructions = document.getElementById('instructions').value;
+            let uniqueId = Date.now(); // Generate a unique ID using timestamp
 
-            var medication = document.getElementById('medication').value;
-            var instructions = document.getElementById('instructions').value;
+            let content = `
+            <div class="mx-auto bg-emerald-300 rounded shadow-md">
+                    <!-- logo  -->
+                    <div class="w-1/2 justify-center mx-auto mb-9">
+                        <img class="w-full h-auto" src="./logo-no-background.png" alt="Responsive Image">
+                    </div>
 
-            var uniqueId = Date.now(); // Generate a unique ID using timestamp
+                    <div class="justify-between">
+                        <!-- Text Content -->
+                        <div class="w-1/2 ">
 
-            var content = `
-            <div class="flex justify-between">
-            <!-- Text Content -->
-            <div class="w-1/2">
-                <h1 class="text-3xl font-bold">DocNet360</h1>
-                <h2 class="text-sm">Your Helth, Your Time, Your Way</h2>
-                <h3 class="text-2xl font-bold mb-2 bg-blue-200">Dr. Muhammad Mustafizur Rahman</h3>
-                <p class="bg-blue-100 rounded-md p-2">MBBS, MCPS (Medicine), MD (Cardiology)
-                    Clinical & Interventional Cardiologist and Cardiac Electrophysiologist
-                    Assistant Professor, Cardiology
-                    National Institute of Cardiovascular Diseases & Hospital</p>
+                            <h3 class="text-2xl font-bold text-purple-700">Dr. Muhammad Mustafizur Rahman</h3>
+                            <p class="text-purple-600">MBBS, MCPS (Medicine), MD (Cardiology)
+                                Clinical & Interventional Cardiologist and Cardiac Electrophysiologist
+                                Assistant Professor, Cardiology
+                                National Institute of Cardiovascular Diseases & Hospital</p>
+                        </div>
+                        <!-- cole doc name file -->
+                        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-purple-900">
+                        <h1 class="text-2xl font-bold mb-6">Prescription Form</h1>
+
+                        <form id="prescriptionForm" class="space-y-4 ">
+                            <div class="grid grid-cols-2 gap-4 bg-fuchsia-200">
+                                <div>
+                                    <div>
+                                        <label for="patientName" class="block text-sm font-medium text-purple-500">Patient Name: ${patientName}</label>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div>
+                                        <label for="patientAge" class="block text-sm font-medium text-purple-500">Patient Age: ${patientAge}</label>
+                                    </div>
+                        
+                                </div>
+                                        <label for="gender" class="block text-sm font-medium text-purple-500">Patient Age:${gender}</label>
+                                <div>
+                                    
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-purple-500">Email: ${email}</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="history" class="block text-sm font-medium text-purple-500">History:${history}</label>
+                                
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-4">
+                                <!-- First item, takes up one-third of the width -->
+                                <div class="col-span-1 p-4 rounded">
+                                    <div>
+                                        <label for="diagnosis" class="block text-sm font-medium text-purple-500">Diagnosis:${diagnosis}</label>
+                                        
+                                    </div>
+                                
+                                </div>
+                    
+                                <!-- Second item, takes up two-thirds of the width -->
+                                <div class="col-span-2 p-4 rounded">
+                                    <div>
+                                        <label for="medication" class="block text-sm font-medium text-purple-500">Medication:${medication}</label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="instructions" class="block text-sm font-medium text-purple-500">Instructions:${instructions}</label>
+                                
+                            </div>
+            </form>
+
             </div>
-            <!-- Image Content -->
-            <div class="w-1/4">
-              <img class="w-full h-auto" src="./docnet360-high-resolution-logo-color-on-transparent-background.png" alt="Responsive Image">
-            </div>
-        </div>
-                <div class="bg-blue-500 text-white px-4 py-2 rounded-md">Patient Name: ${patientName}</div>
-                <div class="bg-blue-500 text-white px-4 py-2 rounded-md">Patient Age: ${patientAge}</div>
-
-                <div class="text-green-600">Medication: ${medication}</div>
-                <div class="text-orange-600">Instructions: ${instructions}</div>
             `;
 
-            var element = document.createElement('div');
+            let element = document.createElement('div');
             element.innerHTML = content;
 
-            var filename = `${patientName}_Prescription_${uniqueId}.pdf`;
+            let filename = `${patientName}_Prescription_${uniqueId}.pdf`;
 
             html2pdf(element, {
                 margin: 10,
