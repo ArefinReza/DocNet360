@@ -29,20 +29,20 @@
             
         </div>
           
-        <h1 class="text-2xl font-bold mb-6">Prescription Form</h1>
+        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-purple-900">
 
         <form id="prescriptionForm" class="space-y-4 ">
             <div class="grid grid-cols-4 gap-4">
                 <div>
                     <div>
-                        <label for="patientName" class="block text-sm font-medium text-purple-500 ">Patient Name:</label>
+                        <label for="patientName" class="block text-base font-medium text-purple-500 ">Patient Name:</label>
                         <input type="text" id="patientName" name="patientName" class="mt-1 p-2 w-full border rounded-md text-violet-700	">
                     </div>
                 </div>
                 
                 <div>
                     <div>
-                        <label for="patientAge" class="block text-sm font-medium text-purple-500">Patient Age:</label>
+                        <label for="patientAge" class="block text-base font-medium text-purple-500">Patient Age:</label>
                         <input type="text" id="patientAge" name="patientAge" class="mt-1 p-2 w-full border rounded-md">
                     </div>
         
@@ -55,12 +55,12 @@
                     </select>
                 </div>
                 <div>
-                    <label for="email" class="block text-sm font-medium text-purple-500">Email:</label>
+                    <label for="email" class="block text-base font-medium text-purple-500">Email:</label>
                     <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
                 </div>
               </div>
             <div>
-                <label for="history" class="block text-sm font-medium text-purple-500">History:</label>
+                <label for="history" class="block text-base font-medium text-purple-500">History:</label>
                 <textarea id="history" name="history" rows="1" class="mt-1 p-2 w-full border rounded-md"></textarea>
             </div>
 
@@ -68,7 +68,7 @@
                 <!-- First item, takes up one-third of the width -->
                 <div class="col-span-1 p-4 rounded">
                     <div>
-                        <label for="diagnosis" class="block text-sm font-medium text-purple-500">Diagnosis:</label>
+                        <label for="diagnosis" class="block text-base font-medium text-purple-500">Diagnosis:</label>
                         <textarea id="diagnosis" name="diagnosis" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
                     </div>
                  
@@ -77,20 +77,22 @@
                 <!-- Second item, takes up two-thirds of the width -->
                 <div class="col-span-2 p-4 rounded">
                     <div>
-                        <label for="medication" class="block text-sm font-medium text-purple-500">Medication:</label>
+                        <label for="medication" class="block text-base font-medium text-purple-500">Medication:</label>
                         <textarea id="medication" name="medication" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
                     </div>
                 </div>
             </div>
             <div>
-                <label for="instructions" class="block text-sm font-medium text-purple-500">Instructions:</label>
+                <label for="instructions" class="block text-base font-medium text-purple-500">Instructions:</label>
                 <textarea id="instructions" name="instructions" rows="4" class="mt-1 p-2 w-full border rounded-md"></textarea>
             </div>
 
             <div class="space-x-2">
-                <button type="button" onclick="generatePDF()" class="bg-blue-500 text-white px-4 py-2 rounded-md">Generate PDF</button>
+                <button type="button" onclick="generatePDF()" class="bg-blue-500 text-white px-4 py-2 rounded-md ">Generate PDF</button>
                 <button type="button" onclick="printPDF()" class="bg-green-500 text-white px-4 py-2 rounded-md">Print PDF</button>
             </div>
+            
+            
         </form>
 
     </div>
@@ -126,25 +128,25 @@
                         </div>
                         <!-- cole doc name file -->
                         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-purple-900">
-                        <h1 class="text-2xl font-bold mb-6">Prescription Form</h1>
 
                         <form id="prescriptionForm" class="space-y-4 ">
                             <div class="grid grid-cols-2 gap-4 bg-fuchsia-200">
                                 <div>
-                                        <label for="patientName" class="block text-sm font-medium text-purple-900">Patient Name: ${patientName}</label>
+                                        <label for="patientName" class="block text-base font-medium text-purple-900">Patient Name: ${patientName}</label>
                                 </div>
                                 <div>
-                                        <label for="patientName" class="block text-sm font-medium text-purple-900">Patient Age: ${patientAge}</label>
+                                        <label for="patientName" class="block text-base font-medium text-purple-900">Patient Age: ${patientAge}</label>
                                 </div>
                                 <div>
-                                        <label for="patientName" class="block text-sm font-medium text-purple-900">Patient Gender: ${gender}</label>
+                                        <label for="patientName" class="block text-base font-medium text-purple-900">Patient Gender: ${gender}</label>
                                 </div>
                                 <div>
-                                        <label for="patientName" class="block text-sm font-medium text-purple-900">Patient Email: ${email}</label>
+                                        <label for="patientName" class="block text-base font-medium text-purple-900">Patient Email: ${email}</label>
                                 </div>
                             </div>
+                            <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-purple-900">
                             <div>
-                                <label for="history" class="block text-sm font-medium text-purple-900">History: ${history}</label>
+                                <label for="history" class="block text-base font-medium text-purple-900">History: ${history}</label>
                                 
                             </div>
 
@@ -152,7 +154,7 @@
                                 <!-- First item, takes up one-third of the width -->
                                 <div class="col-span-1 p-4 rounded">
                                     <div>
-                                        <label for="diagnosis" class="block text-sm font-medium text-purple-900">Diagnosis: ${diagnosis}</label>
+                                        <label for="diagnosis" class="block text-base font-medium text-purple-900">Diagnosis: ${diagnosis}</label>
                                         
                                     </div>
                                 
@@ -161,15 +163,18 @@
                                 <!-- Second item, takes up two-thirds of the width -->
                                 <div class="col-span-2 p-4 rounded">
                                     <div>
-                                        <label for="medication" class="block text-sm font-medium text-purple-900">Medication:</label>
-                                        <label for="medication" class="block text-sm font-medium text-purple-900">Rx, ${medication}</label>
+                                        <label for="medication" class="block text-base font-medium text-purple-900">Medication:</label>
+                                        <label for="medication" class="block text-base font-medium text-purple-900">Rx, ${medication}</label>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <label for="instructions" class="block text-sm font-medium text-purple-900">Instructions:${instructions}</label>
+                                <label for="instructions" class="block text-base font-medium text-purple-900">Instructions:${instructions}</label>
                                 
+                            </div>
+                            <div>
+                                <img class="w-1/4 float-right pb-10" src="./signature.png" alt="" srcset="">
                             </div>
             </form>
 
