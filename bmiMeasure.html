@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100 p-4">
+
+    <div class="max-w-lg mx-auto bg-white p-8 rounded shadow-md">
+        <div class="w-full justify-center mx-auto mb-9">
+            <img class="w-full h-auto" src="./logo-no-background.png" alt="Responsive Image">
+        </div>
+        <h1 class="text-2xl font-bold mb-6">BMI Calculator</h1>
+
+        <form id="bmiForm" class="space-y-4">
+            <div>
+                <label for="weight" class="block text-sm font-medium text-gray-600">Weight:</label>
+                <input type="number" id="weight" name="weight" class="mt-1 p-2 w-full border rounded-md">
+                <select id="weightUnit" name="weightUnit" class="mt-1 p-2 w-full border rounded-md">
+                    <option value="kg" selected>Kilograms (kg)</option>
+                    <option value="lbs">Pounds (lbs)</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="height" class="block text-sm font-medium text-gray-600">Height:</label>
+                <input type="number" id="height" name="height" class="mt-1 p-2 w-full border rounded-md">
+                <select id="heightUnit" name="heightUnit" class="mt-1 p-2 w-full border rounded-md">
+                    <option value="ft"selected>Feet (ft)</option>
+                    <option value="cm" >Centimeters (cm)</option>
+                    <option value="m">Meters (m)</option>
+                    <option value="in">Inches (in)</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="button" onclick="calculateBMI()" class="bg-blue-500 text-white px-4 py-2 rounded-md">Calculate BMI</button>
+            </div>
+
+            <div id="result" class="hidden">
+                <h2 class="text-xl font-semibold mb-2">Result:</h2>
+                <p id="bmiResult" class="text-gray-700"></p>
+                <p id="bmiCategory" class="text-green-600 font-semibold mt-2"></p>
+                <p id="bmiRecommendation" class="text-gray-700 mt-2"></p>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        function calculateBMI() {
+            var weight = document.getElementById('weight').value;
+            var height = document.getElementById('height').value;
+            var weightUnit = document.getElementById('weightUnit').value;
+            var heightUnit = document.getElementById('heightUnit').value;
+
+            if (weight && height) {
+                // Convert weight and height to metric units (kg, cm)
+                if (weightUnit === 'lbs') {
+                    weight = weight * 0.453592; // 1 kg = 0.453592 lbs
+                }
+
+                switch (heightUnit) {
+                    case 'cm':
+                        // No conversion needed
+                        break;
+                    case 'm':
+                        height = height * 100; // 1 m = 100 cm
+                        break;
+                    case 'ft':
+                        height = height * 30.48; // 1 ft = 30.48 cm
+                        break;
+                    case 'in':
+                        // No conversion needed
+                        break;
+                    default:
+                        break;
+                }
+
+                var bmi = (weight / ((height / 100) * (height / 100))).toFixed(2);
+                var resultElement = document.getElementById('result');
+                var bmiResultElement = document.getElementById('bmiResult');
+                var bmiCategoryElement = document.getElementById('bmiCategory');
+                var bmiRecommendationElement = document.getElementById('bmiRecommendation');
+
+                resultElement.classList.remove('hidden');
+                bmiResultElement.textContent = 'Your BMI is ' + bmi;
+
+                // Determine BMI category
+                var bmiCategory = getBMICategory(bmi);
+                bmiCategoryElement.textContent = 'Category: ' + bmiCategory;
+
+                // Display BMI recommendation
+                var bmiRecommendation = getBMIRecommendation(bmiCategory);
+                bmiRecommendationElement.textContent = 'Recommendation: ' + bmiRecommendation;
+
+            } else {
+                alert('Please enter both weight and height to calculate BMI.');
+            }
+        }
+
+        function getBMICategory(bmi) {
+            if (bmi < 18.5) {
+                return 'Underweight';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                return 'Normal weight (Healthy)';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                return 'Overweight';
+            } else {
+                return 'Obese';
+            }
+        }
+
+        function getBMIRecommendation(category) {
+            switch (category) {
+                case 'Underweight':
+                    return 'You may need to gain some weight to reach a healthy BMI range.';
+                case 'Normal weight (Healthy)':
+                    return 'Maintain a healthy lifestyle with balanced nutrition and regular exercise.';
+                case 'Overweight':
+                    return 'Consider adopting a healthier lifestyle with a focus on balanced nutrition and regular exercise.';
+                case 'Obese':
+                    return 'It is recommended to consult with a healthcare professional for personalized advice.';
+                default:
+                    return '';
+            }
+        }
+    </script>
+
+</body>
+</html>
