@@ -12,7 +12,7 @@
     <div class="max-w-5xl mx-auto bg-emerald-300 p-8 rounded shadow-md">
         <!-- logo  -->
         <div class="w-1/2 justify-center mx-auto mb-9">
-            <img class="w-full h-auto" src="./logo-no-background.png" alt="Responsive Image">
+            <img class="w-full h-auto" id="logo" src="./logo-no-background.png" alt="Responsive Image">
         </div>
 
         <div class="justify-between">
@@ -89,6 +89,7 @@
 
             <div class="space-x-2">
                 <button type="button" onclick="generatePDF()" class="bg-blue-500 text-white px-4 py-2 rounded-md ">Generate PDF</button>
+                <button type="button" onclick="sendEmail()" class="bg-purple-500 text-white px-4 py-2 rounded-md">Send Email</button>
                 <button type="button" onclick="printPDF()" class="bg-green-500 text-white px-4 py-2 rounded-md">Print PDF</button>
             </div>
             
@@ -98,6 +99,8 @@
     </div>
 
     <script>
+        let uniqueId = Date.now(); // Generate a unique ID using timestamp
+        let filename = `${patientName}_Prescription_${uniqueId}.pdf`;
         function generatePDF() {
             let patientName = document.getElementById('patientName').value;
             let patientAge = document.getElementById('patientAge').value;
@@ -107,7 +110,7 @@
             let history = document.getElementById('history').value;
             let diagnosis = document.getElementById('diagnosis').value;
             let instructions = document.getElementById('instructions').value;
-            let uniqueId = Date.now(); // Generate a unique ID using timestamp
+            
 
             let content = `
             <div class="mx-auto bg-emerald-300 rounded shadow-md">
@@ -126,6 +129,8 @@
                                 Assistant Professor, Cardiology
                                 National Institute of Cardiovascular Diseases & Hospital</p>
                         </div>
+                        <div><p class="text-purple-600 text-right">ID: ${filename}<p></div>
+                    </div>
                         <!-- cole doc name file -->
                         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-purple-900">
 
@@ -175,8 +180,9 @@
                             </div>
                             <div>
                                 <img class="w-1/4 float-right pb-10" src="./signature.png" alt="" srcset="">
+                                <p float-right>signeture</p>
                             </div>
-            </form>
+                        </form>
 
             </div>
             `;
@@ -184,7 +190,7 @@
             let element = document.createElement('div');
             element.innerHTML = content;
 
-            let filename = `${patientName}_Prescription_${uniqueId}.pdf`;
+            
 
             html2pdf(element, {
                 margin: 10,
@@ -193,6 +199,38 @@
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             });
+        }
+        function sendEmail() {
+            let patientName = document.getElementById('patientName').value;
+            let patientAge = document.getElementById('patientAge').value;
+            let gender = document.getElementById('gender').value;
+            let email = document.getElementById('email').value;
+            let medication = document.getElementById('medication').value;
+            let history = document.getElementById('history').value;
+            let diagnosis = document.getElementById('diagnosis').value;
+            let instructions = document.getElementById('instructions').value;
+            
+
+            var content = `
+                ID: ${filename}
+
+                Patient Name: ${patientName}    Age : ${patientAge}
+
+                Gender: ${gender}       Email: ${email}
+
+                History: ${history}
+
+                Medication: Rx,
+                                 ${medication}
+
+                Instructions: ${instructions}
+            `;
+
+            var subject = `Prescription for ${patientName}`;
+
+            var mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+
+            window.location.href = mailtoLink;
         }
 
         function printPDF() {
