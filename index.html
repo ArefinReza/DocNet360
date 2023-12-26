@@ -129,7 +129,7 @@
                                 Assistant Professor, Cardiology
                                 National Institute of Cardiovascular Diseases & Hospital</p>
                         </div>
-                        <div><p class="text-purple-600 text-right">ID: ${filename}<p></div>
+                        <div><p class="text-purple-600 text-right">ID: ${uniqueId}<p></div>
                     </div>
                         <!-- cole doc name file -->
                         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-purple-900">
@@ -168,17 +168,17 @@
                                 <!-- Second item, takes up two-thirds of the width -->
                                 <div class="col-span-2 p-4 rounded">
                                     <div>
-                                        <label for="medication" class="block text-base font-medium text-purple-900">Medication:</label>
-                                        <label for="medication" class="block text-base font-medium text-purple-900">Rx, ${medication}</label>
+                                        <label for="medication" class="block text-base font-medium text-purple-900">Medication: </label>
+                                        <label for="medication" class="block text-base font-medium text-purple-900">        Rx,   ${medication}</label>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <label for="instructions" class="block text-base font-medium text-purple-900">Instructions:${instructions}</label>
+                                <label for="instructions" class="block text-base font-medium text-purple-900">Instructions:  ${instructions}</label>
                                 
                             </div>
-                            <div>
+                            <div class="w-1/4 float-right pb-10">
                                 <img class="w-1/4 float-right pb-10" src="./signature.png" alt="" srcset="">
                                 <p float-right>signeture</p>
                             </div>
@@ -189,7 +189,7 @@
 
             let element = document.createElement('div');
             element.innerHTML = content;
-
+            let filename = `${patientName}_Prescription_${uniqueId}.pdf`;
             
 
             html2pdf(element, {
@@ -212,7 +212,7 @@
             
 
             var content = `
-                ID: ${filename}
+                ID: ${uniqueId}
 
                 Patient Name: ${patientName}    Age : ${patientAge}
 
